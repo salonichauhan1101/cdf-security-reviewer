@@ -77,6 +77,7 @@ def build_report(findings, app_name, model_name):
     out.append("- Static code review only; no exploit execution or runtime testing")
     out.append("- AI output can be incomplete or wrong, so some findings need manual confirmation")
     out.append("- No guarantee that every vulnerability was found")
+    out.append("- Impact statements assume the endpoint can be reached by the stated caller. Whether a login is required before an edge function runs (platform or gateway settings) is not visible in the code")
     out.append("- Exploitability depends on deployment context that is not visible in the code\n")
     return "\n".join(out)
 

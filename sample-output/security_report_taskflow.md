@@ -338,4 +338,5 @@ The application shows significant potential weaknesses in access control and inp
 - Static code review only; no exploit execution or runtime testing
 - AI output can be incomplete or wrong, so some findings need manual confirmation
 - No guarantee that every vulnerability was found
+- Impact statements assume the endpoint can be reached by the stated caller. Whether a login is required before an edge function runs (platform or gateway settings) is not visible in the code
 - Exploitability depends on deployment context that is not visible in the code
