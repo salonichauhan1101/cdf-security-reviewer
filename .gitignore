@@ -4,3 +4,6 @@ hackathon-package/
 __pycache__/
 .DS_Store
 raw_findings.json
+verified_findings.json
+.Rhistory
+security_report.md
