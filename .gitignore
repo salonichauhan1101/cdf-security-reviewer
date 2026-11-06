@@ -3,3 +3,4 @@ venv/
 hackathon-package/
 __pycache__/
 .DS_Store
+raw_findings.json
