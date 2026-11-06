@@ -34,6 +34,7 @@ Rules:
   Never call a value a leaked production credential unless it clearly is one.
 - If exploitability depends on missing context, explain that in "assumptions".
 - Report each root cause once.
+- Keep "evidence" to the 1-5 most relevant lines, not the whole function.
 - Quote "evidence" EXACTLY as it appears in the file, without the line-number prefix.
 - Severity must be one of: Critical, High, Medium, Low.
 - Confidence must be one of: High, Medium, Low.
@@ -119,13 +120,14 @@ if __name__ == "__main__":
     files = collect_files(target)
     print(f"Found {len(files)} files to review.")
 
-    # Test mode: python reviewer.py <folder> <one file path>
-    if len(sys.argv) > 2:
-        files = [f for f in files if f[0] == sys.argv[2]]
-        if not files:
-            print("That file path was not found in the list.")
-            sys.exit(1)
+    all_findings = []
+    for name, text in files:
+        print(f"Analyzing {name} ...")
+        found = analyze_file(name, text)
+        print(f"  {len(found)} findings")
+        all_findings.extend(found)
+        time.sleep(3)
 
-    name, text = files[0]
-    print(f"Analyzing {name} ...")
-    print(json.dumps(analyze_file(name, text), indent=2))
+    with open("raw_findings.json", "w") as f:
+        json.dump(all_findings, f, indent=2)
+    print(f"\nDone. {len(all_findings)} raw findings saved to raw_findings.json")
